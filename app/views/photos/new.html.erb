@@ -40,53 +40,57 @@
                                 <div class="col-md-6">
                                     <p>Damage room overview 1</p>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btnn" disabled>
-                                            <% if @photos.count >= 1 %>
+                                        <!-- <button class="btnn" disabled> -->
+                                            <% if @photos.where(name: "photo-1-1").present? %>
                                                 <%= image_tag serve_photo_path(@photos.first) %>
                                             <% else %>
-                                                <%= image_tag "img-1.png", class: "img-fluid" %>
+                                                <%= image_tag "img-1.png", class: "img-fluid", id: "grid-1-1" %>
                                             <% end %>
-                                        </button>
-                                        <%#= f.file_field :data %>
+                                        <!-- </button> -->
+                                        <%= f.hidden_field :name, value: "photo-1-1" %>
+                                        <%= f.file_field :data, class: "file", id: "1-1" %>
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <p>Damage room overview 1</p>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btnn" disabled>
-                                            <% if @photos.count >= 2 %>
-                                                <%= image_tag serve_photo_path(@photos.first(2).last) %>
+                                        <!-- <button class="btnn" disabled> -->
+                                            <% if @photos.where(name: "photo-1-1").present? %>
+                                                <%= image_tag serve_photo_path(@photos.where(name: "photo-1-1").last) %>
                                             <% else %>
-                                                <%= image_tag "img-1.png", class: "img-fluid" %>
+                                                <%= image_tag "img-1.png", class: "img-fluid", id: "grid-1-2" %>
                                             <% end %>
-                                        </button>
-                                        <%#= f.file_field :data %>
+                                        <!-- </button> -->
+                                        <%= f.hidden_field :name, value: "photo-1-2" %>
+                                        <%= f.file_field :data, id: "1-2" %>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mt-2">
                                     <p>Damage room overview 1</p>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btnn" disabled>
-                                            <% if @photos.count >= 3 %>
-                                                <%= image_tag serve_photo_path(@photos.first(3).last) %>
+                                        <!-- <button class="btnn" disabled> -->
+                                            <% if @photos.where(name: "photo-2-1").present? %>
+                                                <%= image_tag serve_photo_path(@photos.where(name: "photo-2-1").last) %>
                                             <% else %>
-                                                <%= image_tag "img-2.png", class: "img-fluid" %>
+                                                <%= image_tag "img-2.png", class: "img-fluid", id: "grid-2-1" %>
                                             <% end %>
-                                        </button>
-                                        <%#= f.file_field :data %>
+                                        <!-- </button> -->
+                                        <%= f.hidden_field :name, value: "photo-2-1" %>
+                                        <%= f.file_field :data, id: "2-1" %>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mt-2 text-right">
                                     <p>Damage room overview 1</p>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btnn" disabled>
-                                            <% if @photos.count >= 4 %>
-                                                <%= image_tag serve_photo_path(@photos.first(4).last) %>
+                                        <!-- <button class="btnn" disabled> -->
+                                            <% if @photos.where(name: "photo-2-2").present? %>
+                                                <%= image_tag serve_photo_path(@photos.where(name: "photo-2-2").last) %>
                                             <% else %>
-                                                <%= image_tag "img-2.png", class: "img-fluid" %>
+                                                <%= image_tag "img-2.png", class: "img-fluid", id: "grid-2-2" %>
                                             <% end %>
-                                        </button>
-                                        <%#= f.file_field :data %>
+                                        <!-- </button> -->
+                                        <%= f.hidden_field :name, value: "photo-2-2" %>
+                                        <%= f.file_field :data, id: "2-2" %>
                                     </div>
                                 </div>
                                 <% if @photos.count > 4 %>
@@ -97,18 +101,17 @@
                                         <button class="btnn" disabled>
                                             <%= image_tag serve_photo_path(photo) %>
                                         </button>
-                                        <%#= f.file_field :data %>
                                     </div>
                                 </div>
                                 <% end %>
                                 <% end %>
 
-                                <div class="col-md-6 mt-2">
+                                <div class="col-md-6 mt-2" id="extra">
                                     <p>Damage room overview 1</p>
                                     <div class="upload-btn-wrapper">
                                         <%= f.hidden_field :name, value: "photo-#{rand(10)}" %>
-                                        <button class="btnn"><%= image_tag "photo-upload.png", class: "img-fluid" %></button>
-                                        <%= f.file_field :data %>
+                                        <%= image_tag "photo-upload.png", class: "img-fluid" %>
+                                        <%= f.file_field :data, class: "file", id: "extra-plus"  %>
                                     </div>
                                 </div>
                             </div>
@@ -125,16 +128,79 @@
             </div>
         </div>
         <% end %>
-        <%= content_for :javascript do -%>
+        <%#= content_for :javascript do -%>
         <script type="text/javascript">
         	$(function() {
-                $("img.img-fluid").click(function(e) {
-                    console.log("!@#$%^&*()");
-                    e.preventDefault();
-                    $("input#photo_data").click();
+
+
+                // var preview = $(".upload-preview img");
+
+                $("#1-1").change(function(event){
+                    
+                   var input = $(event.currentTarget);
+                   var file = input[0].files[0];
+                   var reader = new FileReader();
+                   reader.onload = function(e){
+                       image_base64 = e.target.result;
+                       console.log($(this).prev());
+                       $("img#grid-1-1").attr("src", image_base64);
+                   };
+                   reader.readAsDataURL(file);
+                });
+
+                $("#1-2").change(function(event){
+                    
+                   var input = $(event.currentTarget);
+                   var file = input[0].files[0];
+                   var reader = new FileReader();
+                   reader.onload = function(e){
+                       image_base64 = e.target.result;
+                       console.log($(this).prev());
+                       $("img#grid-1-2").attr("src", image_base64);
+                   };
+                   reader.readAsDataURL(file);
+                });
+
+                $("#2-1").change(function(event){
+                    
+                   var input = $(event.currentTarget);
+                   var file = input[0].files[0];
+                   var reader = new FileReader();
+                   reader.onload = function(e){
+                       image_base64 = e.target.result;
+                       console.log($(this).prev());
+                       $("img#grid-2-1").attr("src", image_base64);
+                   };
+                   reader.readAsDataURL(file);
+                });
+
+                $("#2-2").change(function(event){
+                    
+                   var input = $(event.currentTarget);
+                   var file = input[0].files[0];
+                   var reader = new FileReader();
+                   reader.onload = function(e){
+                       image_base64 = e.target.result;
+                       console.log($(this).prev());
+                       $("img#grid-2-2").attr("src", image_base64);
+                   };
+                   reader.readAsDataURL(file);
+                });
+
+                $("#extra-plus").change(function(event){
+                    
+                   var input = $(event.currentTarget);
+                   var file = input[0].files[0];
+                   var reader = new FileReader();
+                   reader.onload = function(e){
+                       image_base64 = e.target.result;
+                       console.log($(this).prev());
+                       $("#extra").before(`<div class="col-md-6 mt-2" id="extra"><p>Damage room overview 1</p><div class="upload-btn-wrapper"><img class="img-fluid" id="grid-2-2" src=${image_base64} alt="Img 2"></div></div>`);
+                   };
+                   reader.readAsDataURL(file);
                 });
             });
         </script>
-        <% end -%>
+        <%# end -%>
     </body>
 </html>
