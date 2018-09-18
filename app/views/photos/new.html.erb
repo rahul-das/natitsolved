@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
     </head>
     <body>
-        <%= form_for(@photo, :html => {:multipart => true}) do |f| %>
+        
         <div class="page-bg p-4">
             <div class="white-bg">
                 <div class="container">
@@ -47,22 +47,28 @@
                                                 <%= image_tag "img-1.png", class: "img-fluid", id: "grid-1-1" %>
                                             <% end %>
                                         <!-- </button> -->
-                                        <%= f.hidden_field :name, value: "photo-1-1" %>
-                                        <%= f.file_field :data, class: "file", id: "1-1" %>
+                                        <%= form_for(@photo1, :html => {:multipart => true}) do |f| %>
+                                            <%= f.hidden_field :name, value: "photo-1-1" %>
+                                            <%= f.file_field :data, class: "file", id: "1-1" %>
+                                            <%= f.submit "Submit", class: "send" %>
+                                        <% end %>
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <p>Damage room overview 1</p>
                                     <div class="upload-btn-wrapper">
                                         <!-- <button class="btnn" disabled> -->
-                                            <% if @photos.where(name: "photo-1-1").present? %>
+                                            <% if @photos.where(name: "photo-1-2").present? %>
                                                 <%= image_tag serve_photo_path(@photos.where(name: "photo-1-1").last) %>
                                             <% else %>
                                                 <%= image_tag "img-1.png", class: "img-fluid", id: "grid-1-2" %>
                                             <% end %>
                                         <!-- </button> -->
-                                        <%= f.hidden_field :name, value: "photo-1-2" %>
-                                        <%= f.file_field :data, id: "1-2" %>
+                                        <%= form_for(@photo2, :html => {:multipart => true}) do |f| %>
+                                            <%= f.hidden_field :name, value: "photo-1-2" %>
+                                            <%= f.file_field :data, class: "file", id: "1-2" %>
+                                            <%= f.submit "Submit", class: "send" %>
+                                        <% end %>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mt-2">
@@ -75,8 +81,11 @@
                                                 <%= image_tag "img-2.png", class: "img-fluid", id: "grid-2-1" %>
                                             <% end %>
                                         <!-- </button> -->
-                                        <%= f.hidden_field :name, value: "photo-2-1" %>
-                                        <%= f.file_field :data, id: "2-1" %>
+                                        <%= form_for(@photo3, :html => {:multipart => true}) do |f| %>
+                                            <%= f.hidden_field :name, value: "photo-2-1" %>
+                                            <%= f.file_field :data, class: "file", id: "2-1" %>
+                                            <%= f.submit "Submit", class: "send" %>
+                                        <% end %>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mt-2 text-right">
@@ -89,8 +98,11 @@
                                                 <%= image_tag "img-2.png", class: "img-fluid", id: "grid-2-2" %>
                                             <% end %>
                                         <!-- </button> -->
-                                        <%= f.hidden_field :name, value: "photo-2-2" %>
-                                        <%= f.file_field :data, id: "2-2" %>
+                                        <%= form_for(@photo4, :html => {:multipart => true}) do |f| %>
+                                            <%= f.hidden_field :name, value: "photo-2-2" %>
+                                            <%= f.file_field :data, class: "file", id: "2-2" %>
+                                            <%= f.submit "Submit", class: "send" %>
+                                        <% end %>
                                     </div>
                                 </div>
                                 <% if @photos.count > 4 %>
@@ -111,7 +123,12 @@
                                     <div class="upload-btn-wrapper">
                                         <%#= f.hidden_field :name, value: "photo-#{rand(10)}" %>
                                         <%= image_tag "photo-upload.png", class: "img-fluid" %>
-                                        <%= f.file_field :data, class: "file", id: "extra-plus"  %>
+                                        <%= form_for(@photo, :html => {:multipart => true}) do |f| %>
+                                            <%= f.hidden_field :name, value: "photo-#{rand(10)}" %>
+                                            <%= f.file_field :data, class: "file", id: "extra-plus"  %>
+                                            <%= f.submit "Submit", class: "send" %>
+                                        <% end %>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -121,13 +138,13 @@
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
                                 <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#">Terms & Conditions</a></label>
                             </div>
-                            <%= f.submit "Submit", class: "send" %>
+                            <%#= f.submit "Submit", class: "send" %>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <% end %>
+        
         <%#= content_for :javascript do -%>
         <script type="text/javascript">
         	$(function() {
