@@ -38,7 +38,7 @@ class PhotosController < ApplicationController
 
     # normal save
     if @photo.save
-      redirect_to(@photo, :notice => 'Photo was successfully created.')
+      redirect_to new_photo_url
     else
       render :action => "new"
     end
