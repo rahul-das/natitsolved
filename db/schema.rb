@@ -10,11 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180918120643) do
+ActiveRecord::Schema.define(version: 20180918113319) do
 
-  create_table "photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "photos", force: :cascade do |t|
     t.string "name", null: false
-    t.binary "data", limit: 16777215, null: false
+    t.binary "data", null: false
     t.string "filename"
     t.string "mime_type"
     t.datetime "created_at", null: false
