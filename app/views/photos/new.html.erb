@@ -89,6 +89,20 @@
                                         <%#= f.file_field :data %>
                                     </div>
                                 </div>
+                                <% if @photos.count > 4 %>
+                                <% @photos.last(@photos.count - 4).each do |photo| %>
+                                <div class="col-md-6 mt-2 text-right">
+                                    <p>Damage room overview 1</p>
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btnn" disabled>
+                                            <%= image_tag serve_photo_path(photo) %>
+                                        </button>
+                                        <%#= f.file_field :data %>
+                                    </div>
+                                </div>
+                                <% end %>
+                                <% end %>
+
                                 <div class="col-md-6 mt-2">
                                     <p>Damage room overview 1</p>
                                     <div class="upload-btn-wrapper">
