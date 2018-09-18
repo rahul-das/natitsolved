@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Sniglet" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    </head>
+    <body>
+        <%= form_for(@photo, :html => {:multipart => true}) do |f| %>
+        <div class="page-bg p-4">
+            <div class="white-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 hd">
+                            <h3>Claim Photo Capture</h3>
+                        </div>
+                        <div class="col-md-12 p-4">
+                            <h4 class="text-center"><b>REPLACE WITH <br>ANY NICE</b></h4>
+                        </div>
+                        <div class="col-md-12">
+                            <h5><b>A fast and easy way to capture your claim photos and documents!</b></h5>
+                        </div>
+                        <div class="col-9 light-color">
+                        </div>
+                        <div class="col-3 dark-color">
+                        </div>
+                        <div class="col-md-12 py-2">
+                            <h5>Claim no. :2</h5>
+                            <h5>Arslan Ahmad</h5>
+                        </div>
+                        <div class="col-md-12 photo">
+                            <h4>Photo upload/capture</h4>
+                        </div>
+
+                        <div class="col-md-12 photo-bg">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>Damage room overview 1</p>
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btnn" disabled>
+                                            <% if @photos.count >= 1 %>
+                                                <%= image_tag serve_photo_path(@photos.first) %>
+                                            <% else %>
+                                                <%= image_tag "img-1.png", class: "img-fluid" %>
+                                            <% end %>
+                                        </button>
+                                        <%#= f.file_field :data %>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <p>Damage room overview 1</p>
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btnn" disabled>
+                                            <% if @photos.count >= 2 %>
+                                                <%= image_tag serve_photo_path(@photos.first(2).last) %>
+                                            <% else %>
+                                                <%= image_tag "img-1.png", class: "img-fluid" %>
+                                            <% end %>
+                                        </button>
+                                        <%#= f.file_field :data %>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <p>Damage room overview 1</p>
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btnn" disabled>
+                                            <% if @photos.count >= 3 %>
+                                                <%= image_tag serve_photo_path(@photos.first(3).last) %>
+                                            <% else %>
+                                                <%= image_tag "img-2.png", class: "img-fluid" %>
+                                            <% end %>
+                                        </button>
+                                        <%#= f.file_field :data %>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-2 text-right">
+                                    <p>Damage room overview 1</p>
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btnn" disabled>
+                                            <% if @photos.count >= 4 %>
+                                                <%= image_tag serve_photo_path(@photos.first(4).last) %>
+                                            <% else %>
+                                                <%= image_tag "img-2.png", class: "img-fluid" %>
+                                            <% end %>
+                                        </button>
+                                        <%#= f.file_field :data %>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <p>Damage room overview 1</p>
+                                    <div class="upload-btn-wrapper">
+                                        <%= f.hidden_field :name, value: "photo-#{rand(10)}" %>
+                                        <button class="btnn"><%= image_tag "photo-upload.png", class: "img-fluid" %></button>
+                                        <%= f.file_field :data %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 px-5 py-2">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                                <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#">Terms & Conditions</a></label>
+                            </div>
+                            <%= f.submit "Submit", class: "send" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
+        <%= content_for :javascript do -%>
+        <script type="text/javascript">
+        	$(function() {
+                $("img.img-fluid").click(function(e) {
+                    console.log("!@#$%^&*()");
+                    e.preventDefault();
+                    $("input#photo_data").click();
+                });
+            });
+        </script>
+        <% end -%>
+    </body>
+</html>
