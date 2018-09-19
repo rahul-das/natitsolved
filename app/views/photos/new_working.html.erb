@@ -1,0 +1,19 @@
+<%= form_tag upload_multiple_photos_path, method: :put, multipart: true do %>
+
+  <% @empty_photos.each do |photo| %>
+  
+    <%= fields_for "photos[]", photo, include_id: false do |f| %>
+
+      <h2><%#=h photo.name %></h2>
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :data %>
+        <%= f.file_field :data %>
+      </div>
+    <% end %>
+  <% end %>
+  <p><%= submit_tag "Submit" %></p>
+<% end %>
